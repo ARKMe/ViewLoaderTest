@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    AnimateContainer[] views;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
 
-        final AnimateContainer[] views = new AnimateContainer[4];
+        views = new AnimateContainer[4];
         views[0] = new GroupContainer(findViewById(R.id.textview1_1), findViewById(R.id.textview1_2));
         views[1] = new ViewContainer(findViewById(R.id.textview2));
         views[2] = new ViewContainer(findViewById(R.id.textview3));
@@ -45,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0; i<views.length; i++)
             views[i].animate(i*300);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        for(int i=0; i<views.length; i++)
+            views[i].stopAnimation();
     }
 
     public void animate2(final View v, int offset){

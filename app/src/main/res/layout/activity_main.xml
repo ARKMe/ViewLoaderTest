@@ -24,14 +24,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
-            android:background="@android:color/holo_blue_dark"/>
+            android:background="@drawable/shape"/>
 
         <TextView
             android:id="@+id/textview1_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
-            android:background="@android:color/holo_blue_dark"/>
+            android:background="@drawable/shape"/>
 
     </LinearLayout>
 
@@ -40,20 +40,20 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@android:color/holo_blue_dark"/>
+        android:background="@drawable/shape"/>
 
     <TextView
         android:id="@+id/textview3"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@android:color/holo_blue_dark"/>
+        android:background="@drawable/shape"/>
 
     <TextView
         android:id="@+id/textview4"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@android:color/holo_blue_dark"/>
+        android:background="@drawable/shape"/>
 
 </LinearLayout>

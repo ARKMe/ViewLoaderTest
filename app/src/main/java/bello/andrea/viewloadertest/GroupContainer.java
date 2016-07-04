@@ -1,14 +1,14 @@
 package bello.andrea.viewloadertest;
 
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.Log;
 import android.view.View;
 
-public class GroupContainer implements AnimateContainer {
+public class GroupContainer extends AnimateContainer {
 
     View[] content;
 
@@ -17,27 +17,23 @@ public class GroupContainer implements AnimateContainer {
     }
 
     @Override
-    public void animate(int offset) {
-        final ValueAnimator animator = ValueAnimator.ofInt(Color.WHITE, Color.GRAY);
-        animator.setDuration(ANIMATION_DURATION);
-        animator.setInterpolator(new GaussianInterpolator());
-        animator.setStartDelay(offset);
-        animator.setEvaluator(new ArgbEvaluator());
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+    protected ValueAnimator.AnimatorUpdateListener getUpdateListener() {
+        return new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int now = (int) animation.getAnimatedValue();
                 //Log.i("a", "a");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    for(View view : content)
-                        view.setBackground(new ColorDrawable(now));
-                } else {
-                    for(View view : content)
-                        view.setBackgroundDrawable(new ColorDrawable(now));
+                for(View view : content){
+                    Drawable background = view.getBackground();
+                    if (background instanceof ShapeDrawable) {
+                        ((ShapeDrawable)background).getPaint().setColor(now);
+                    } else if (background instanceof GradientDrawable) {
+                        ((GradientDrawable)background).setColor(now);
+                    } else if (background instanceof ColorDrawable) {
+                        ((ColorDrawable)background).setColor(now);
+                    }
                 }
             }
-        });
-        animator.start();
+        };
     }
 }
